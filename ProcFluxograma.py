@@ -30,14 +30,14 @@ def gerar_fluxograma(filepath):
 
     colunas_necessarias = [
         "NOMEPROCESSO",
-        "ATIVIDADE INÕCIO",
+        "ATIVIDADE IN√çCIO",
         "ATIVIDADE ORIGEM",
         "PROCEDIMENTO",
         "ATIVIDADE DESTINO",
     ]
     for col in colunas_necessarias:
         if col not in df.columns:
-            raise ValueError(f"? Coluna obrigatÛria ausente no Excel: {col}")
+            raise ValueError(f"‚ùå Coluna obrigat√≥ria ausente no Excel: {col}")
 
     nome_processo = str(df["NOMEPROCESSO"].dropna().unique()[0]).strip()
 
@@ -57,7 +57,7 @@ def gerar_fluxograma(filepath):
     arestas_criadas = set()
 
     df_agrupado = df.groupby(["ATIVIDADE ORIGEM", "PROCEDIMENTO"]).agg({
-        "ATIVIDADE INÕCIO": "first",
+        "ATIVIDADE IN√çCIO": "first",
         "ATIVIDADE DESTINO": lambda x: [str(i) for i in x.dropna()]
     }).reset_index()
 
@@ -65,7 +65,7 @@ def gerar_fluxograma(filepath):
         raw_atividade = row["ATIVIDADE ORIGEM"]
         raw_procedimento = row["PROCEDIMENTO"]
         raw_destinos = row["ATIVIDADE DESTINO"]
-        inicio_flag = str(row["ATIVIDADE INÕCIO"]).strip().upper() if pd.notna(row["ATIVIDADE INÕCIO"]) else "NAO"
+        inicio_flag = str(row["ATIVIDADE IN√çCIO"]).strip().upper() if pd.notna(row["ATIVIDADE IN√çCIO"]) else "NAO"
 
         atividade = wrap_label(raw_atividade)
         procedimento = wrap_label(raw_procedimento)
@@ -73,7 +73,7 @@ def gerar_fluxograma(filepath):
         def safe_id(text, prefix="n"):
             import re
             t = (prefix + "_" + (text if text else "vazio")).replace(" ", "_")
-            t = re.sub(r'[^0-9A-Za-z_·‡„‚ÈÍÌÛÙı˙Á¡¿√¬… Õ”‘’⁄«\\-]', '', t)
+            t = re.sub(r'[^0-9A-Za-z_√°√†√£√¢√©√™√≠√≥√¥√µ√∫√ß√Å√Ä√É√Ç√â√ä√ç√ì√î√ï√ö√á\\-]', '', t)
             return t
 
         atividade_id = safe_id(str(raw_atividade), prefix="act")
@@ -84,7 +84,7 @@ def gerar_fluxograma(filepath):
             if inicio_node not in nos_criados:
                 dot.node(
                     inicio_node,
-                    "InÌcio",
+                    "In√≠cio",
                     shape="rect",
                     style="rounded,filled",
                     fillcolor=COLOR_START_FILL,
