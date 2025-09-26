@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import pandas as pd
 from graphviz import Digraph
 import textwrap
@@ -47,11 +48,15 @@ def gerar_fluxograma(filepath):
         label=nome_processo,
         labelloc="t",
         fontsize="20",
-        fontname="Roboto",
+        fontname="Roboto",  # mantém Roboto
         fontcolor="black",
     )
     dot.attr(splines="ortho")
     dot.attr("edge", color=COLOR_EDGE, penwidth="1.5", arrowsize="0.8")
+
+    # Aplica Roboto nos nós e arestas
+    dot.node_attr.update(fontname="Roboto")
+    dot.edge_attr.update(fontname="Roboto")
 
     nos_criados = set()
     arestas_criadas = set()
@@ -73,7 +78,7 @@ def gerar_fluxograma(filepath):
         def safe_id(text, prefix="n"):
             import re
             t = (prefix + "_" + (text if text else "vazio")).replace(" ", "_")
-            t = re.sub(r'[^0-9A-Za-z_áàãâéêíóôõúçÁÀÃÂÉÊÍÓÔÕÚÇ\\-]', '', t)
+            t = re.sub(r'[^0-9A-Za-z_áàãâéêíóôõúçÁÀÃÂÉÊÍÓÔÕÚÇ\-]', '', t)
             return t
 
         atividade_id = safe_id(str(raw_atividade), prefix="act")
@@ -191,3 +196,8 @@ def gerar_fluxograma(filepath):
     dot.render(os.path.join(output_dir, "fluxograma"), format="png", cleanup=True)
     dot.render(os.path.join(output_dir, "fluxograma"), format="pdf", cleanup=True)
     dot.render(os.path.join(output_dir, "fluxograma"), format="svg", cleanup=True)
+
+    # Legendas de download
+    print("Baixar PNG")
+    print("Baixar PDF")
+    print("Baixar SVG")
