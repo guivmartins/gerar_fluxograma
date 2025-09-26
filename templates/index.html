@@ -9,6 +9,20 @@
 <body>
   <div class="container">
     <h1>Gerador de Fluxograma</h1>
+
+    <p>
+        <br>
+        Colunas obrigatórias para a montagem do Fluxograma:<br>
+        <br>
+        <strong>NOME PROCESSO</strong><br>
+        <strong>ATIVIDADE INÍCIO</strong><br>
+        <strong>ATIVIDADE ORIGEM</strong><br>
+        <strong>PROCEDIMENTO</strong><br>
+        <strong>ATIVIDADE DESTINO</strong><br><br>
+        Arquivos somente <strong>.xlsx</strong>
+        <br>
+    </p>
+    
     <form method="POST" enctype="multipart/form-data">
       <input type="file" name="file" accept=".xlsx" required>
       <button type="submit">Gerar Fluxograma</button>
@@ -28,3 +42,4 @@
   </div>
 </body>
 </html>
+
