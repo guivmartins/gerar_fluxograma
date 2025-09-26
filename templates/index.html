@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Fluxograma</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Gerador de Fluxograma</h1>
+    <form method="POST" enctype="multipart/form-data">
+      <input type="file" name="file" accept=".xlsx" required>
+      <button type="submit">Gerar Fluxograma</button>
+    </form>
+
+    {% if image_file %}
+    <div class="result">
+      <h2>Fluxograma:</h2>
+      <img src="{{ url_for('static', filename='fluxograma.png') }}" alt="Fluxograma">
+      <div class="downloads">
+        <a href="{{ url_for('static', filename='fluxograma.pdf') }}" download>?? Baixar PDF</a>
+        <a href="{{ url_for('static', filename='fluxograma.svg') }}" download>?? Baixar SVG</a>
+        <a href="{{ url_for('static', filename='fluxograma.png') }}" download>?? Baixar PNG</a>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</body>
+</html>
