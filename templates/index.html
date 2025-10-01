@@ -6,6 +6,17 @@
 </head>
 <body>
     <h1>Gerador de Fluxograma</h1>
+
+    <p class="info">
+     Colunas obrigatórias para a montagem do Fluxograma:<br><br>
+     NOME PROCESSO<br>
+     ATIVIDADE INÍCIO<br>
+     ATIVIDADE ORIGEM<br>
+     PROCEDIMENTO<br>
+     ATIVIDADE DESTINO<br><br>
+     Arquivos somente <b>.xlsx</b>
+    </p>
+    
     <form method="post" enctype="multipart/form-data">
         <input type="file" name="excel_file" accept=".xlsx" required>
         <button type="submit">Gerar Fluxograma</button>
@@ -20,3 +31,4 @@
     <a href="/static/fluxograma.svg" download>Baixar SVG</a>
 </body>
 </html>
+
