@@ -30,7 +30,7 @@ def gerar_fluxograma(filepath):
     df = pd.read_excel(filepath)
 
     colunas_necessarias = [
-        "NOMEPROCESSO",
+        "NOME PROCESSO",
         "ATIVIDADE INÍCIO",
         "ATIVIDADE ORIGEM",
         "PROCEDIMENTO",
@@ -40,7 +40,7 @@ def gerar_fluxograma(filepath):
         if col not in df.columns:
             raise ValueError(f"❌ Coluna obrigatória ausente no Excel: {col}")
 
-    nome_processo = str(df["NOMEPROCESSO"].dropna().unique()[0]).strip()
+    nome_processo = str(df["NOME PROCESSO"].dropna().unique()[0]).strip()
 
     dot = Digraph(comment="Fluxograma", format="png")
     dot.attr(rankdir="LR")
@@ -138,3 +138,4 @@ def gerar_fluxograma(filepath):
     dot.render(os.path.join(output_dir, "fluxograma"), format="png", cleanup=True)
     dot.render(os.path.join(output_dir, "fluxograma"), format="pdf", cleanup=True)
     dot.render(os.path.join(output_dir, "fluxograma"), format="svg", cleanup=True)
+
