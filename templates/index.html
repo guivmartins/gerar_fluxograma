@@ -1,35 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Gerador de Fluxograma</title>
-  <link rel="stylesheet" href="/static/style.css">
+    <meta charset="UTF-8">
+    <title>Fluxograma</title>
 </head>
 <body>
-  <h1>Gerador de Fluxograma</h1>
+    <h1>Gerador de Fluxograma</h1>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="excel_file" accept=".xlsx" required>
+        <button type="submit">Gerar Fluxograma</button>
+    </form>
 
-  <p class="info">
-    Colunas obrigatórias para a montagem do Fluxograma:<br><br>
-    NOME PROCESSO<br>
-    ATIVIDADE INÍCIO<br>
-    ATIVIDADE ORIGEM<br>
-    PROCEDIMENTO<br>
-    ATIVIDADE DESTINO<br><br>
-    Arquivos somente <b>.xlsx</b>
-  </p>
+    <h2>Fluxograma Gerado</h2>
+    <img src="/static/fluxograma.png" alt="Fluxograma" style="max-width:90%;">
 
-  <form method="POST" enctype="multipart/form-data">
-    <input type="file" name="file" accept=".xlsx" required>
-    <button type="submit">Enviar</button>
-  </form>
-
-  {% if files %}
-    <h2>Downloads</h2>
-    <ul>
-      <li><a href="/download/{{ files['pdf'] }}">Baixar PDF</a></li>
-      <li><a href="/download/{{ files['svg'] }}">Baixar SVG</a></li>
-      <li><a href="/download/{{ files['png'] }}">Baixar PNG</a></li>
-    </ul>
-  {% endif %}
+    <h3>Download</h3>
+    <a href="/static/fluxograma.png" download>Baixar PNG</a><br>
+    <a href="/static/fluxograma.pdf" download>Baixar PDF</a><br>
+    <a href="/static/fluxograma.svg" download>Baixar SVG</a>
 </body>
 </html>
