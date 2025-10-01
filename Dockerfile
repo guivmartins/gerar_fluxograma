@@ -1,20 +1,15 @@
-# Usar imagem Python
 FROM python:3.13-slim
 
-# Instalar dependências do sistema
-RUN apt-get update && apt-get install -y graphviz && rm -rf /var/lib/apt/lists/*
-
-# Criar diretório da app
 WORKDIR /app
 
-# Copiar arquivos
-COPY . .
+# Instalar Graphviz
+RUN apt-get update && apt-get install -y graphviz && rm -rf /var/lib/apt/lists/*
 
-# Instalar dependências
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expor porta
+COPY . .
+
 EXPOSE 10000
 
-# Comando de inicialização
-CMD ["gunicorn", "-b", "0.0.0.0:10000", "app:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:10000", "app:app"]
